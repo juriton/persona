@@ -4,8 +4,8 @@ This application acts as a REST service for persons registry.
 
 ## Resources
 
-* Git repository - backend: 
-* Git repository - web client: 
+* Git repository(web client) - https://github.com/juriton/persona-web.git
+* Git repository(backend api) - https://github.com/juriton/persona.git
 
 ### Build and Run
 
