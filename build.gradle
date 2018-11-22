@@ -1,0 +1,77 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id 'java'
+	id 'net.ltgt.apt' version '0.9'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+group = 'ee.tallink.'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.rkas.ee/repository/maven-releases/' }
+	maven { url 'https://repo.rkas.ee/repository/thirdparty/' }
+}
+ext {
+	mapstructVersion = "1.2.0.Final"
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile ('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+
+	compile 'org.springframework.boot:spring-boot-starter-actuator:1.5.4.RELEASE'
+	compile 'org.springframework.security:spring-security-cas'
+	compile 'org.springframework:spring-context-support'
+	compile 'org.springframework.boot:spring-boot-starter-mail'
+
+	compile('org.liquibase:liquibase-core')
+	runtime('com.h2database:h2')
+	runtime('org.postgresql:postgresql')
+
+	compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+
+	// Swagger
+	compile ('io.springfox:springfox-swagger2:2.9.2') {
+		exclude group: 'org.mapstruct', module: 'mapstruct'
+	}
+
+	// Lombok
+	compileOnly('org.projectlombok:lombok')
+
+	// Test
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.security:spring-security-test'
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.assertj:assertj-core:3.7.0'
+	testRuntime 'com.unboundid:unboundid-ldapsdk'
+
+	// Annotation processing
+	apt "org.mapstruct:mapstruct-processor:${mapstructVersion}", "org.projectlombok:lombok"
+}
+
+
