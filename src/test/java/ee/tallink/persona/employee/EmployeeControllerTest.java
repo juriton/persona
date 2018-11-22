@@ -22,7 +22,7 @@ public class EmployeeControllerTest extends PersonaIntegrationTestBase {
     public void testEmployees() throws Exception {
         mockMvc.perform(get("/company/directors/1/managers/1/employees").contentType(APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$['content']", hasSize(4)));
+                .andExpect(jsonPath("$['content']", hasSize(5)));
     }
 
     @Test
